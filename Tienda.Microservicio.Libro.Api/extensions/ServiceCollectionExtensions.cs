@@ -2,12 +2,12 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tienda.Microservicio.Libro.Api.Aplicacion;
-using Tienda.Microservicio.Libro.Api.Persistencia;  
+using Tienda.Microservicio.Libro.Api.Persistencia;
 namespace Tienda.Microservicio.Libro.Api.extensions
 {
     public static class ServiceCollectionsExtensions
     {
-        public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration configuration)
+            public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Controladores + Validaciones
             services.AddControllers()
@@ -16,7 +16,7 @@ namespace Tienda.Microservicio.Libro.Api.extensions
 
             services.AddDbContext<ContextoAutor>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
